@@ -28,7 +28,12 @@ namespace Personstantiator
             public required Action<string, string> SetCatchphrase { get; set; }
         }
 
-
+        /// <summary>
+        /// Initializes the application by wiring up all commands into a generic
+        /// <see cref="CommandRegistry{TOptions}"/>. Since the CommandRegistry
+        /// catches and returns errors, we'll assert non-nulls and let the
+        /// error-writer display it to the user.
+        /// </summary>
         public PersonstantiatorApp()
         {
             registry = new CommandRegistry<CommandRegistryOptions>(
