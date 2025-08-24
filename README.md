@@ -2,6 +2,8 @@
 
 A lightweight C# console app with a generic command registry that applies reflection, custom attributes, and delegate-based command execution.
 
+It's built to show how a **generic command registry** can be wired up cleanly with **reflection and attributes**, while keeping the app code simple and testable through modular .NET architecture.
+
 ## Overview
 
 Personstantiator is a small sandbox project where you can:
@@ -13,7 +15,6 @@ Personstantiator is a small sandbox project where you can:
 - Exit gracefully  
 - Get contextual help on available commands  
 
-It's built to show how a **generic command registry** can be wired up cleanly with **reflection and attributes**, while keeping the app code simple and testable through modular .NET architecture.
 
 ## Commands
 
