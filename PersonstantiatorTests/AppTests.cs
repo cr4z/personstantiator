@@ -25,9 +25,25 @@ namespace PersonstantiatorTests
 
             app.RunCommand("/add Alice Hello");
 
-            Assert.Equal(1, app.PeopleCount);
+            Assert.Single(app.People);
             Assert.Equal("Alice", app.People[0].Name);
             Assert.Equal("Hello", app.People[0].Catchphrase);
+        }
+
+        [Fact]
+        public void ReadCommand_ShouldListPeople()
+        {
+            var app = new PersonstantiatorApp();
+
+            StringWriter sw = new();
+            Console.SetOut(sw);
+
+            app.RunCommand("/add Alice Hello");
+            app.RunCommand("/read");
+
+            var output = sw.ToString();
+
+            Assert.Contains("Alice", output);
         }
 
         [Fact]
@@ -57,6 +73,22 @@ namespace PersonstantiatorTests
 
             var output = sw.ToString();
             Assert.Contains("Command does not exist", output);
+        }
+
+        [Fact]
+        public void TotalCommand_ShouldListTotal()
+        {
+            var app = new PersonstantiatorApp();
+            var sw = new StringWriter();
+            Console.SetOut(sw);
+
+            app.RunCommand("/add Bob Yo");
+            app.RunCommand("/add Alice Hello");
+            app.RunCommand("/total");
+
+            var output = sw.ToString();
+
+            Assert.Contains("2", output);
         }
     }
 }

@@ -26,6 +26,9 @@ namespace Personstantiator
 
             [Comment("Set a person's catchphrase: <name> <catchphrase>")]
             public required Action<string, string> SetCatchphrase { get; set; }
+
+            [Comment("List total number of people")]
+            public required Action Total { get; set; }
         }
 
         /// <summary>
@@ -48,7 +51,8 @@ namespace Personstantiator
                     },
                     Speak = name => Console.WriteLine(people.Find(p => p.Name == name)!.Catchphrase),
                     Clear = () => people.Clear(),
-                    SetCatchphrase = (name, catchphrase) => people.Find(p => p.Name == name)!.Catchphrase = catchphrase
+                    SetCatchphrase = (name, catchphrase) => people.Find(p => p.Name == name)!.Catchphrase = catchphrase,
+                    Total = () => Console.WriteLine(people.Count)
                 },
                 new Dictionary<string, Expression<Func<CommandRegistryOptions, Delegate>>>
                 {
@@ -58,6 +62,7 @@ namespace Personstantiator
                     ["/speak"] = o => o.Speak,
                     ["/clear"] = o => o.Clear,
                     ["/setcatchphrase"] = o => o.SetCatchphrase,
+                    ["/total"] = o => o.Total,
                     ["/help"] = _ => new Action(() => Console.WriteLine(string.Join(Environment.NewLine, registry!.GetHelp())))
                 });
         }

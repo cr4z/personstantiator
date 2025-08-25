@@ -5,7 +5,7 @@ namespace CommandRegistryTests
 {
     public class CommandRegistryTests
     {
-        private CommandRegistry<PersonstantiatorApp.CommandRegistryOptions> MakeRegistry()
+        private static CommandRegistry<PersonstantiatorApp.CommandRegistryOptions> MakeRegistry()
         {
             var opts = new PersonstantiatorApp.CommandRegistryOptions
             {
@@ -14,7 +14,8 @@ namespace CommandRegistryTests
                 ReadPeople = () => { },
                 Speak = n => { },
                 Clear = () => { },
-                SetCatchphrase = (n, c) => { }
+                SetCatchphrase = (n, c) => { },
+                Total = () => { }
             };
 
             var commands = new Dictionary<string, Expression<Func<PersonstantiatorApp.CommandRegistryOptions, Delegate>>>
@@ -25,6 +26,7 @@ namespace CommandRegistryTests
                 ["/speak"] = o => o.Speak,
                 ["/clear"] = o => o.Clear,
                 ["/setcatchphrase"] = o => o.SetCatchphrase,
+                ["/total"] = o => o.Total,
             };
 
             return new CommandRegistry<PersonstantiatorApp.CommandRegistryOptions>(opts, commands);
@@ -62,7 +64,8 @@ namespace CommandRegistryTests
                 ReadPeople = () => { },
                 Speak = n => { },
                 Clear = () => { },
-                SetCatchphrase = (n, c) => { }
+                SetCatchphrase = (n, c) => { },
+                Total = () => { },
             };
 
             var commands = new Dictionary<string, Expression<Func<PersonstantiatorApp.CommandRegistryOptions, Delegate>>>
